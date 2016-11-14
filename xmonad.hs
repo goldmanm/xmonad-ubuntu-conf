@@ -89,8 +89,8 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7",  "8:Term", "9:Pix",
-    "4:Ana",  "5:Write", "6",
+    "7:Chat",  "8:Term", "9:Pix",
+    "4:Ana",  "5:Write", "6:Read",
     "1:Web",  "2:Mail", "3:Dev",
     "0:Note",    "Extr1", "Extr2"
   ]
@@ -268,6 +268,7 @@ myManagementHooks = [
   , className =? "Spyder" --> doF (W.shift "3:Dev")
   , className =? "chromium-browser" --> doF (W.shift "4:Ana")
   , className =? "TeXstudio" --> doF (W.shift "5:Write")
+  , className =? "Zotero" --> doF (W.shift "6:Read")
   , resource =? "stalonetray" --> doIgnore
   , className =? "rdesktop" --> doFloat
   , (className =? "Komodo IDE") --> doF (W.shift "3:Dev")
