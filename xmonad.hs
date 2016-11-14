@@ -89,13 +89,13 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:Chat",  "8:Dbg", "9:Pix",
-    "4:Docs",  "5:Dev", "6:Web",
-    "1:Term",  "2:Hub", "3:Mail",
-    "0:VM",    "Extr1", "Extr2"
+    "7",  "8:Term", "9:Pix",
+    "4:Ana",  "5:Write", "6",
+    "1:Web",  "2:Mail", "3:Dev",
+    "0:Note",    "Extr1", "Extr2"
   ]
 
-startupWorkspace = "5:Dev"  -- which workspace do you want to be on after launch?
+startupWorkspace = "0:Note"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -231,7 +231,9 @@ myKeyBindings =
   want to identify. In the output that is printed in your terminal,
   look for a couple of things:
     - WM_CLASS(STRING): values in this list of strings can be compared
-      to "className" to match windows.
+      to "className" to match windows. when using this below, use the 
+      last "className" that appears in the "xprop" list with
+      "xprop | grep 'CLASS'"
     - WM_NAME(STRING): this value can be compared to "resource" to match
       windows.
 
@@ -260,15 +262,19 @@ myKeyBindings =
 myManagementHooks :: [ManageHook]
 myManagementHooks = [
   resource =? "synapse" --> doIgnore
+  , className =? "Gedit" --> doF (W.shift "0:Note")
+  , className =? "Firefox" --> doF (W.shift "1:Web")
+  , className =? "Thunderbird" --> doF (W.shift "2:Mail")
+  , className =? "Spyder" --> doF (W.shift "3:Dev")
+  , className =? "chromium-browser" --> doF (W.shift "4:Ana")
+  , className =? "TeXstudio" --> doF (W.shift "5:Write")
   , resource =? "stalonetray" --> doIgnore
   , className =? "rdesktop" --> doFloat
-  , (className =? "Komodo IDE") --> doF (W.shift "5:Dev")
+  , (className =? "Komodo IDE") --> doF (W.shift "3:Dev")
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
-  , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
-  , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
-  , (className =? "Empathy") --> doF (W.shift "7:Chat")
-  , (className =? "Pidgin") --> doF (W.shift "7:Chat")
-  , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
+  , (className =? "Empathy") --> doF (W.shift "7")
+  , (className =? "Pidgin") --> doF (W.shift "7")
+  , (className =? "Gimp") --> doF (W.shift "9:Pix")
   ]
 
 

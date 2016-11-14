@@ -32,13 +32,47 @@ if [ -z "$(pgrep system-config-printer-applet)" ] ; then
     system-config-printer-applet &
 fi
 
+
 #
 # APPLICATION LAUNCHER
 #
 
-# Use synapse as our app launcher. (-s: don't display until requested) 
 if [ -z "$(pgrep synapse)" ] ; then
     synapse -s &
+fi
+
+if [ -z "$(pgrep thunderbird)" ] ; then
+    thunderbird &
+fi
+
+if [ -z "$(pgrep spyder)" ] ; then
+    spyder &
+fi
+
+if [ -z "$(pgrep firefox)" ] ; then
+    firefox &
+fi
+
+if [ -z "$(pgrep gedit)" ] ; then
+    gedit ~/research/notes/timeline.md ~/research/notes/todo.md ~/research/notes/journal.md &
+fi
+
+if [ -z "$(pgrep dropbox)" ] ; then
+    dropbox start &
+fi
+
+if [ -z "$(pgrep redshift)" ] ; then
+    redshift -l 41:-72 &
+fi
+
+# go to remote desktop if laptop is connected to eddie's monitor
+
+EXTERN=HDMI1
+
+if $(xrandr --prop |grep -q "$EXTERN connected 1920x1200");then
+  xrandr --output eDP1 --off
+else
+  xrandr --prop > ~/.xmonod/monitor.log
 fi
 
 # On login, we unlock the ssh keychain so we're not prompted for 
@@ -67,5 +101,5 @@ fi
 # change depending on what devices you have plugged into USB. We extract the
 # id of the device from the output of xinput, then use it to disable the
 # device
-TOUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
-xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
+# TOUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
+# xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
