@@ -71,9 +71,15 @@ EXTERN=HDMI1
 
 if $(xrandr --prop |grep -q "$EXTERN connected 1920x1200");then
   xrandr --output eDP1 --off
-else
-  xrandr --prop > ~/.xmonod/monitor.log
 fi
+
+# for desktop computer
+
+if ($(xrandr --prop |grep -q "VGA1 connected 1680x1050")) && ($(xrandr --prop |grep -q "HDMI1 connected 1600x900"));then
+  xrandr --output VGA1 --primary --output HDMI1 --right-of VGA1
+fi
+
+xrandr --prop > ~/.xmonad/monitor.log
 
 # On login, we unlock the ssh keychain so we're not prompted for 
 # passphrases later. We pipe /dev/null to ssh-add to make it realize 
