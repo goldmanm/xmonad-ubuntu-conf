@@ -37,17 +37,17 @@ fi
 # APPLICATION LAUNCHER
 #
 
-if [ -z "$(pgrep synapse)" ] ; then
-    synapse -s &
-fi
+#if [ -z "$(pgrep synapse)" ] ; then
+#    synapse -s &
+#fi
 
 if [ -z "$(pgrep thunderbird)" ] ; then
     thunderbird &
 fi
 
-if [ -z "$(pgrep spyder)" ] ; then
-    spyder &
-fi
+#if [ -z "$(pgrep spyder)" ] ; then
+#    spyder &
+#fi
 
 if [ -z "$(pgrep firefox)" ] ; then
     firefox &
